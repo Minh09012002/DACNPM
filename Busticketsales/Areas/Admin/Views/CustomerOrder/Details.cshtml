@@ -1,0 +1,54 @@
+﻿@model Busticketsales.Models.CustomerOrder;
+@using Busticketsales.Models
+<!-- Blog Start -->
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Xem Chi tài khoản </h2>
+    </div>
+    <div class="container-fluid  wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="recent-sales overflow-auto" style="border-top:1px solid rgba(0,0,0,0.125)">
+                            <div class="">
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                        <tr>
+                                            <td class="col-2 text-center" style="color:#f52">Họ và tên</td>
+                                            <td class="col-2 text-center" style="color:#f52">Điểm đi</td>
+                                            <td class="col-2 text-center" style="color:#f52">Điểm đến</td>
+                                            <td class="col-2 text-center" style="color:#f52">Ngày đi</td>
+                                            <td class="col-2 text-center" style="color:#f52">Giờ đi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                            <th class="text-center" scope="row"> @Html.DisplayFor(model => model.FullName)</th>
+                                            <td class="text-center">@Html.DisplayFor(model => model.PointStrDetail)</td>
+                                            <td class="text-center">@Html.DisplayFor(model => model.PointEndDetail)</td>
+                                            <td class="text-center">@Model.Date.Value.ToString("dd/MM/yyyy")</td>
+
+                                            @*<td class="text-center">@Html.DisplayFor(model => model.Date, "{0:yyyy/MM/dd}")</td>*@
+                                            <td class="text-center">@Html.DisplayFor(model => model.time)</td>
+                                               
+                                            </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <a class="btn btn-lg btn-warning p-2 mr-5" href="javascript:history.back()">
+                                <i class="bi bi-arrow-left-circle"></i> Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+

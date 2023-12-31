@@ -1,0 +1,372 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model IList<CustomerOrder>;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-12">
+                <h1 class="seat-title">Xin mời quý khách chọn chỗ</h1>
+              @*  @foreach (var b in Model)
+                {
+                    <div class="row bus-content">
+                        <div class="bus-time-content">
+                            <div class="col-lg-2">
+                                <div class="row ">
+                                    <div class="col-lg-2 ">
+                                        <i class="fas fa-regular fa-clock"></i>
+                                    </div>
+                                    <div class="col-lg-10 bus-time">
+                                        <span class="" style="font-weight: 700">
+                                            @b.Time  &rarr; @b.ArrivalTime
+                                        </span>
+                                        <div class="">
+                                            thời gian 7:30 phút
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <i class="fas fa-solid fa-car"></i>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <span class="star-point">
+                                            @b.PointStart &rarr;@b.PointEnd
+                                        </span>
+                                        <div class="boarding-point">
+                                            Điềm đón trả khách
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <i class="fas fa-solid fa-chair"></i>
+                                    </div>
+                                    <div class="col-lg-10 totle-seat">
+                                        <span class="">
+                                            @b.Seat
+                                        </span>
+                                        <div class="rul-ag">
+                                            Chính sách huỷ vẻ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="col-lg-10">
+                                    <span class="price">
+                                        @b.Price
+                                    </span>
+                                    <div class="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 btn-col-4">
+                                <button id="btn-seat" data-bs-target="#@b.ItemTarget" data-bs-toggle="collapse" type="button" class="btn seat-btn collapsed" aria-expanded="false">Chọn chỗ</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div id="@b.IdName" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                        <!-- chọn chỗ -->
+                        <div id="bus-time-category" class="bus-time-booking">
+                            <div class="bus-time-category">
+                                <div class="book-view row ">
+                                    <div class="seartWrap col-7 ">
+                                        <div class="seats row ">
+                                            <div class="col-2">
+                                                <div class="lower-new">Tầng 2</div>
+                                            </div>
+                                            <div class="col-10">
+                                                <ul class="">
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L2 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L2 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L3 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L4 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L5 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L6 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L7 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L8 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L9 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L10 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L11 - 400"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l" title="L12 - 400"></div>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="seats row ">
+                                            <div class="col-2">
+                                                <div class="lower-new">Tầng 1</div>
+                                            </div>
+                                            <div class="col-10">
+                                                <ul class="">
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                    <li class="">
+
+                                                        <div class="seat-l"></div>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- note seat -->
+
+                                        <div class="note-seat">
+                                            <div class="ns-list">
+                                                <div class="ns-item">
+                                                    <span class="ns-seat bg-white"></span>
+                                                    <span>Ghế Trống</span>
+                                                </div>
+                                                <div class="ns-item">
+                                                    <span class="ns-seat bg-danger"></span>
+                                                    <span>Đang chọn</span>
+                                                </div>
+                                                <div class="ns-item ">
+                                                    <span class="ns-seat bg-warning"></span>
+                                                    <span>Đã Đặt</span>
+                                                </div>
+                                                <div class="ns-item">
+                                                    <span class="ns-seat bg-secondary"></span>
+                                                    <span>Đã Bán</span>
+                                                </div>
+                                                <div class="ns-item">
+                                                    <span class="ns-seat bg-light"></span>
+                                                    <span>Ghế Không Bán</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <!-- Vertical Form -->
+                                        <form class="row g-3">
+
+                                            <div class="header">
+                                                <div class="header-title d-flex align-item-center">
+                                                    <span>@b.ProvinceStart &rarr; @b.ProvinceEnd</span>
+                                                    <span style="padding: 0px 10px">Ngày : @b.Date</span>
+                                                </div>
+                                                <div class="header-date">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Số điện thoại</label>
+                                                <input type="text" class="form-control" value="@Functions._SĐT">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Họ Tên</label>
+                                                <input type="text" class="form-control" value="@Functions._FullName">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" value="@Functions._Email">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inputAddress" class="form-label">Điểm Đón</label>
+                                                <input type="text" class="form-control" id="inputAddress" value="@b.PointStart">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inputAddress" class="form-label">Điểm Trả</label>
+                                                <input type="text" class="form-control" id="inputAddress" value="@b.PointEnd">
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn book-btn">Đặt Vé</button>
+                                            </div>
+                                        </form><!-- Vertical Form -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frm-booking">
+                            </div>
+                        </div>
+                    </div>
+
+                }*@
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@*
+
+
+@using Busticketsales.Models;
+@using Microsoft.AspNetCore.Mvc;
+@using Busticketsales.Utilities;
+@model IList<CustomerOrder>;
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2> Danh sách đơn đặt bàn của bạn</h2>
+    </div>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body mt-4">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th class="col-1 text-center">Họ và tên</th>
+                                    <th class="col-3 text-center">Điểm đi</th>
+                                    <td class="col-2 text-center">Điểm đến</td>
+                                    <td class="col-2 text-center">Ngày đi</td>
+                                    <td class="col-1 text-center">Giờ đi</td>
+                                    <th class="col-2 text-center">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th class="text-center" scope="row"> @item.FullName</th>
+                                        <td class="text-center">@item.PointStrDetail</td>
+                                        <td class="text-center">@item.PointEndDetail</td>
+                                        <td class="text-center">@item.Date</td>
+                                        <td class="text-center">
+                                            <a asp-area="Admin" asp-controller="Menu" asp-action="Delete"
+                                           asp-route-id="@item.CustomerOrderID" class="btn btn-danger btn-sm"
+                                               title="Xóa nội dung menu"><i class="bi bi-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+*@

@@ -1,0 +1,160 @@
+
+
+.seat-title{
+    font-family: XC Gilroy;
+    color: #333333;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-color: 1px solid;
+    border-bottom: 1px solid #f52;
+}
+
+.bus-time-content{
+    display: flex;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    height: auto;
+    padding: 25px 10px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+}
+
+.bus-time-content:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.bus-time span,
+.star-point,
+.totle-seat span{
+    font-family: XC Gilroy;
+    color: #333;
+    display: inline;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.bus-time div{
+    font-family: XC Gilroy;
+    color: #888888;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 4px 0px 0px;
+}
+
+.boarding-point,
+.rul-ag{
+    font-size: 14px;
+    color: #d2281c;
+}
+
+.price{
+    color: #02913a;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.seat-btn,
+.book-btn{
+    min-width: 90px;
+    color: #fff;
+    font-family: XC Gilroy;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #06ab20;
+    background-image: linear-gradient(140deg, #06ab20 60%, #9dda0a 100%);
+}
+
+.seat-btn:hover{
+    color: #fff;
+}
+/* 
+#bus-time-booking{
+    display: none;
+} */
+
+.bus-time-booking{
+    background: #33333333;
+    padding: 15px 10px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+
+}
+.seartWrap .seats {
+    background: #fff;
+    margin: 0px 0px 15px 0px;
+    padding: 10px 0px;
+    border-left: 5px solid #333;
+}
+
+.seartWrap .lower-new{
+    font-size: 1.5rem;
+    color: #f52;
+    font-family: XC Gilroy;
+}
+.header{
+    display: flex;
+    font-size: 1rem;
+   font-family: XC Gilroy;
+}
+.header .header-title{
+    font-weight: 700;
+    margin-right: 15px ;
+}
+    .seartWrap .seats ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+.seartWrap .seats ul li .seat-l{
+    display: block;
+    margin: 0px 5px 30px;
+    width: 70px;
+    height: 35px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .seartWrap .seats ul li .seat-l.active {
+        background-color: #34ad54;
+    }
+
+    #Seat:focus{
+        outline: none;
+        background: none;
+    }
+    /* note seat */
+    .note-seat {
+    }
+
+.ns-list{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.ns-item{
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 10px 0px;
+}
+
+.ns-item .ns-seat{
+    display: block;
+    width: 50px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.ns-item span{
+    display: block;
+}
+
+.sold{
+    color: yellow;
+}

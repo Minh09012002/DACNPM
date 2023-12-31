@@ -1,0 +1,33 @@
+﻿@model Busticketsales.Models.Route;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Xem thành viên đầu bếp</h2>
+    </div>
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <!-- Blog Detail Start -->
+                    <div class="mb-5">
+                        <span>Điểm Đi : <p class="mb-4">@Html.DisplayFor(model => model.PointOfDe)</p></span>
+
+                        <span>Điểm Đến : <p class="mb-4">@Html.DisplayFor(model => model.StopPoint)</p></span>
+
+                        <span>Hình ảnh : <img src="@Html.DisplayFor(m=>m.Images)" /></span>
+
+                        <span>giá vé : <p>@Html.Raw(Model.Price) </p></span>
+
+
+                        <label>Ẩn hiện:  <p>@Html.Raw(Model.IsActive) </p></label>
+
+                    </div>
+                    <a asp-controller="Route" asp-action="Index" class="btn btn-lg btn-warning p-2">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

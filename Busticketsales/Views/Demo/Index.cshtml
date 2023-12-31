@@ -1,0 +1,362 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model Tuple<IList<BookingOrder>, List<CustomerOrder>>;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .seat.booked {
+        background-color: yellow;
+    }
+
+    .seat.rejected {
+        background-color: red;
+    }
+
+</style>
+
+
+<div class="container-fluid wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-12">
+                <h1 class="seat-title">Xin mời quý khách chọn chỗ</h1>
+                @foreach (var b in Model.Item1)
+                {
+                    <div class="bookingSeat">
+                        <div class="row bus-content">
+                            <div class="bus-time-content">
+                                <div class="col-lg-2">
+                                    <div class="row ">
+                                        <div class="col-lg-2 ">
+                                            <i class="fas fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="col-lg-10 bus-time">
+                                            <span class="" style="font-weight: 700">
+                                                @b.Time  &rarr; @b.ArrivalTime
+                                            </span>
+                                            <div class="">
+                                                thời gian 7:30 phút
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <i class="fas fa-solid fa-car"></i>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <span class="star-point">
+                                                @b.PointStart &rarr;@b.PointEnd
+                                            </span>
+                                            <div class="boarding-point">
+                                                Điềm đón trả khách
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <i class="fas fa-solid fa-chair"></i>
+                                        </div>
+                                        <div class="col-lg-10 totle-seat">
+                                            <span class="">
+                                                @b.Seat Chỗ ngồi
+                                            </span>
+                                            <div class="rul-ag">
+                                                Chính sách huỷ vẻ
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="col-lg-10">
+                                        <span class="price">
+                                            @b.Price
+                                        </span>
+                                        <div class="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 btn-col-4">
+                                    <button id="btn-seat" data-bs-target="#@b.ItemTarget" data-bs-toggle="collapse" type="button" class="btn seat-btn collapsed" aria-expanded="false">Chọn chỗ</button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div id="@b.IdName" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                            <!-- chọn chỗ -->
+                            <div id="bus-time-category" class="bus-time-booking">
+                                <div class="bus-time-category">
+                                    <div class="book-view row ">
+                                        <div class="seartWrap col-7 ">
+                                            <div class="seats row ">
+                                                <div class="col-2">
+                                                    <div class="lower-new">Tầng 1</div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <ul class="">
+                                                        @{
+                                                            var bookings = Model.Item2
+                                                            .Where(m => m.IsActive == true)
+                                                            .Select(k => k.BookingOrderID)
+                                                            .ToList();
+
+                                                            var Seats = Model.Item2
+                                                            .Where(m => m.IsActive == true && m.BookingOrderID == b.BookingOrderID)
+                                                            .Select(order => order.Seat)
+                                                            .ToList();
+
+                                                            var status = Model.Item2
+                                                            .Where(m => m.IsActive == true && m.BookingOrderID == b.BookingOrderID && int.Parse( m.Seat) <= 10 )
+                                                            .OrderBy(p => p.Seat)
+                                                            .Select(order => order.Status)
+                                                            .ToList();
+
+                                                            var statuss = Model.Item2
+                                                            .Where(m => m.IsActive == true && m.BookingOrderID == b.BookingOrderID && int.Parse(m.Seat) > 10)
+                                                            .OrderBy(p => p.Seat)
+                                                            .Select(order => order.Status)
+                                                            .ToList();
+
+
+                                                        }
+
+                                                        @for (int i = 1; i <= b.Seat-10; i++)
+                                                        {
+                                                            bool isBooked = false;
+
+                                                            foreach (var booking in bookings)
+                                                            {
+                                                                if (booking == b.BookingOrderID && Seats.Contains(i.ToString()))
+                                                                {
+                                                                    isBooked = true;
+                                                                    break;
+                                                                }
+                                                            }
+
+                                                            <li class="">
+                                                              
+                                                                @if (isBooked)
+                                                                {
+                                                                    var st = 1;// đã bán
+                                                                    var stt = 2;// đã đặt
+                                                                    var stn = 0;
+                                                                    foreach (var stu in status)
+                                                                    {
+                                                                        @if (stu == st)
+                                                                        {
+                                                                            <div class="seat-l seat rejected" style="background-color: Red ; pointer-events:none" title="@i"></div>
+                                                                            status.Remove(st);
+                                                                            break;
+                                                                        }
+                                                                        else if (stu==stt)
+                                                                        {
+                                                                            <div class="seat-l seat rejected" style="background-color: yellow ; pointer-events:none" title="@i"></div>
+
+                                                                            status.Remove(stt);
+                                                                            break;
+                                                                        }
+                                                                        else if(stu == stn)
+                                                                        {
+                                                                            <div class="seat-l" title=@i></div>
+                                                                            status.Remove(stn);
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    
+
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="seat-l" title=@i></div>
+                                                                }
+                                                            </li>
+                                                        }
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                            <div class="seats row ">
+                                                <div class="col-2">
+                                                    <div class="lower-new">Tầng 2</div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <ul class="">
+                                                       
+
+                                                        @for (int i = 11; i <= b.Seat; i++)
+                                                        {
+                                                            bool isBooked = false;
+
+                                                            foreach (var booking in bookings)
+                                                            {
+                                                                // booking là số Id chuyển xe khách hàng đặt
+                                                                // Seats là số ghế khách hàng đặt
+                                                                if (booking == b.BookingOrderID && Seats.Contains(i.ToString()))
+                                                                {
+                                                                    isBooked = true;
+                                                                    break;
+                                                                }
+                                                            }
+
+                                                            <li class="">
+                                                                @if (isBooked)
+                                                                {
+                                                                    var st = 1;// đã bán
+                                                                    var stt = 2;// đã đặt
+                                                                    var stn = 0;
+                                                                    foreach (var stu in statuss)
+                                                                    {
+                                                                        @if (stu == st)
+                                                                        {
+                                                                            <div class="seat-l seat rejected" style="background-color: Red ; pointer-events:none" title="@i"></div>
+                                                                            statuss.Remove(st);
+                                                                            break;
+                                                                        }
+                                                                        else if (stu == stt)
+                                                                        {
+                                                                            <div class="seat-l seat rejected" style="background-color: yellow ; pointer-events:none" title="@i"></div>
+
+                                                                            statuss.Remove(stt);
+                                                                            break;
+                                                                        }else if(stu == stn)
+                                                                        {
+                                                                            <div class="seat-l" title=@i></div>
+                                                                            statuss.Remove(stn);
+                                                                            break;
+                                                                        }
+                                                                    }
+
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="seat-l" title=@i></div>
+                                                                }
+                                                            </li>
+                                                        }
+
+
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- note seat -->
+
+                                            <div class="note-seat">
+                                                <div class="ns-list">
+                                                    <div class="ns-item">
+                                                        <span class="ns-seat bg-white"></span>
+                                                        <span>Ghế Trống</span>
+                                                    </div>
+                                                    <div class="ns-item">
+                                                        <span class="ns-seat bg-danger"></span>
+                                                        <span>Đã Bán</span>
+                                                    </div>
+                                                    <div class="ns-item ">
+                                                        <span class="ns-seat bg-warning"></span>
+                                                        <span>Đã Đặt</span>
+                                                    </div>
+                                                    <div class="ns-item">
+                                                        <span class="ns-seat bg-secondary"></span>
+                                                        <span>Đang Chọn</span>
+                                                    </div>
+                                                    <div class="ns-item">
+                                                        <span class="ns-seat bg-light"></span>
+                                                        <span>Ghế Không Bán</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <!-- Vertical Form -->
+                                            <form class="row g-3" method="post" asp-controller="CustomersOrder" asp-action="Create">
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">Số hiệu chuyển xe</label>
+                                                    <input name="BookingOrderID" type="text" class="form-control disable" value="@b.BookingOrderID">
+                                                </div>
+                                                <div class="header">
+                                                    <div class="header-title d-flex align-item-center">
+                                                        <span name="ProvinceStr">@b.ProvinceStart &rarr; @b.ProvinceEnd</span>
+                                                        <span style="padding: 0px 10px">Ngày : @b.Date.Value.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex align-item-center">
+                                                    <label class="form-label col-2" style="font-weight: 700">Giờ đi:</label>
+
+                                                    <input name="Time" type="text" class="form-control" readonly style=" background: none; margin-top: -8px; padding:0" value="@b.Time" />
+                                                </div>
+                                                <div class="col-12 d-flex align-item-center">
+                                                    <label class="form-label col-2" style="font-weight: 700">Số Ghế :</label>
+                                                    @* <span name="Seat" id="Seat"></span>*@
+                                                    <input name="Seat" type="text" class="form-control" readonly style=" background: none; margin-top: -8px; padding:0" id="Seat" value="" required />
+                                                </div>
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">Nơi đi</label>
+                                                    <input name="ProvinceStr" type="text" class="form-control disable" value="@b.ProvinceStart">
+                                                </div>
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">Nơi đến</label>
+                                                    <input name="ProvinceEnd" type="text" class="form-control disable" value="@b.ProvinceEnd">
+                                                </div>
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">Ngày đi</label>
+                                                    <input name="Date" type="date" class="form-control disable" value="@b.Date.Value.ToString("yyyy-MM-dd")">
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label class="form-label">Số điện thoại</label>
+                                                    <input name="sdt" type="text" class="form-control" value="@Functions._SĐT" required>
+                                                </div>
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">ID</label>
+                                                    <input name="UserID" type="text" class="form-control" value="@Functions._UserID" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label">Họ Tên</label>
+                                                    <input name="Name" type="text" class="form-control" value="@Functions._FullName" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label">Email</label>
+                                                    <input name="Email" type="email" class="form-control" value="@Functions._Email">
+                                                </div>
+                                               
+
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label ">Ngày Đặt</label>
+                                                    <input name="CreateDate" type="date" class="form-control" id="CreateDate" value="@Functions.getCurrentDate()" />
+                                                </div>
+                                                <div class="col-12 d-none">
+                                                    <label class="form-label">Trạng thái</label>
+                                                    <input name="Status" type="text" class="form-control" id="Status" value="1" />
+
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit" id="btn-booking" class="btn book-btn">Đặt Vé</button>
+                                                </div>
+                                            </form><!-- Vertical Form -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frm-booking">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+

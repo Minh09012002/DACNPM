@@ -1,0 +1,54 @@
+﻿@using Busticketsales.Models;
+@model IList<CustomerOrder>
+
+    @{
+   DateTime today = DateTime.Now.Date;
+    string formattedDate = today.ToString("yyyy-MM-dd");
+
+    var notica = Model
+    .Where(m => m.IsActive == true && m.CreateDate.Value.ToString("yyyy-MM-dd") == formattedDate && m.Status > 0)
+    .Select(k => k.CustomerOrderID)
+    .Count();
+
+    var infotionbook = Model
+           .Where(m => m.IsActive == true && m.CreateDate.Value.ToString("yyyy-MM-dd") == formattedDate && m.Status > 0)
+           .ToList();
+    }
+<li class="nav-item dropdown" >
+
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <i class="bi bi-bell"></i>
+        <span class="badge bg-primary badge-number" id="notification-count">@notica</span>
+    </a><!-- End Notification Icon -->
+
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="min-width:400px">
+        <li class="dropdown-header">
+            Thông Báo
+        </li>
+        <li>
+            <hr class="dropdown-divider" />
+        </li>
+        @foreach (var n in infotionbook)
+        {
+            <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                    <h4>@n.FullName đã đặt vé</h4>
+                    <p>đi từ @n.PointStrDetail đến @n.PointEndDetail</p>
+                    <p>ngày đi @n.Date</p>
+                </div>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        }
+        
+        
+        <li class="dropdown-footer">
+            <a href="#">Xem Tất Cả</a>
+        </li>
+
+    </ul><!-- End Notification Dropdown Items -->
+
+</li><!-- End Notification Nav -->

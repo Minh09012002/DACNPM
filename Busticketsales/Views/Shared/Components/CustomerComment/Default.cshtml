@@ -1,0 +1,41 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model Busticketsales.Models.CustomerComment
+
+<meta charset="utf-8" />
+
+<form asp-controller="Comment" asp-action="Create" method="post" class="row" style="position: relative">
+    <div asp-validation-summary="All"></div>
+    <input type="text" class="form-control mb-3 d-none" asp-for="FullName" value="@Functions._FullName" />
+    <input type="text" class="form-control mb-3 d-none" asp-for="Status" value="1" />
+    <input type="text" class="form-control mb-3 d-none" asp-for="IsActive" value="True" />
+    <input type="date" class="form-control mb-3 d-none" asp-for="CreateDate" />
+    @if (!Functions.IsLoginweb())
+    {
+        <div class="col-md-2">
+            <label asp-for="Images" class="mr-2">
+                <img src="~/assets/img/xc_bus.png" class="img-fluid" style="width: 35px; height: 35px;border-radius:50%">
+            </label>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-2">
+            <label asp-for="Images" class="mr-2">
+                <img src="@Functions._Images" class="img-fluid" style="width: 35px; height: 35px;border-radius:50%">
+                <input type="text" class="form-control mb-3 d-none" asp-for="Images" value="@Functions._Images" />
+            </label>
+        </div>
+        
+    }
+    <div class="col-md-10">
+        <input type="text" class="form-control mb-3 mr-2" style="border-radius:18px; position: relative; left:-66px;" asp-for="Content" value=" " placeceholder="bình luận" />
+    </div>
+
+    <div class="col-md-2" style="position: absolute; right: 15px; bottom: 15px;">
+        <button  class="btn mr-2" style="border-bottom-right-radius: 21%; border-top-right-radius: 21%;" type="submit">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</form>
+

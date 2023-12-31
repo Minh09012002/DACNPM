@@ -1,0 +1,32 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model IList<Post>
+
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+            <h5 class="fw-bold text-uppercase">Tin Tức</h5>
+        </div>
+        <div class="row g-5">
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
+                @foreach (var m in Model)
+                 {
+                    string url = Functions.TitleSlugGeneration("Post", m.Title, m.PostID);
+                    <div class="testimonial-item bg-light my-4 mx-3">
+                            <div class="testimonial-img d-flex align-items-center border-bottom  pb-4 ">
+                                <img class="img-fluid rounded" src="@m.Images" style="">
+                            </div>
+                            <div class="p-4 block-height">
+                                <div class="d-flex mb-3">
+                                    <small><i class="far fa-calendar-alt text-primary me-2"></i>@m.CreateDate</small>
+                                </div>
+                                <h4 class="mb-3 block-title"><a href="/@url" class="read-more">@m.Title</a></h4>
+                                <p class="block-description">@m.Abstract</p>
+
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model IList<CustomerOrder>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2 style="font-size: 1.5rem;text-align: center;padding: 20px;">
+            Danh sách đơn đặt vé của bạn
+        </h2>
+    </div>
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="recent-sales overflow-auto" style="border-top:1px solid rgba(0,0,0,0.125)">
+                    <div class="">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <td class="col-2 text-center" style="color:#f52">Họ và tên</td>
+                                    <td class="col-2 text-center" style="color:#f52">Điểm đi</td>
+                                    <td class="col-2 text-center" style="color:#f52">Điểm đến</td>
+                                    <td class="col-2 text-center" style="color:#f52">Ngày đi</td>
+                                    <td class="col-2 text-center" style="color:#f52">Giờ đi</td>
+                                    <td class="col-2 text-center" style="color:#f52">Huỷ chuyển</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th class="text-center" scope="row"> @item.FullName</th>
+                                        <td class="text-center">@item.PointStrDetail</td>
+                                        <td class="text-center">@item.PointEndDetail</td>
+                                        <td class="text-center">@item.Date</td>
+                                        <td class="text-center">@item.time</td>
+                                        <td class="text-center">
+                                            <a asp-area="" asp-controller="OpenOrder" asp-action="Delete"
+                                           asp-route-id="@item.CustomerOrderID" class="btn btn-danger btn-sm"
+                                               title="Xóa " id="CustomerDelete"><i class="bi bi-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

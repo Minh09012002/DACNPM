@@ -1,0 +1,204 @@
+﻿@using Busticketsales.Models;
+@model IList<CustomerOrder>
+
+@{
+    DateTime today = DateTime.Now.Date;
+    string formattedDate = today.ToString("yyyy-MM-dd");
+
+    var noticaToday = Model
+    .Where(m => m.IsActive == true && m.CreateDate.Value.ToString("yyyy-MM-dd") == formattedDate && m.Status > 0)
+    .Select(k => k.CustomerOrderID)
+    .Count();
+
+    var noticaTotal = Model
+    .Where(m => m.IsActive == true && m.Status > 0)
+    .Select(k => k.CustomerOrderID)
+    .Count();
+
+    
+
+    var listtotalPriceToday = Model
+    .Where(m => m.IsActive == true && m.CreateDate.Value.ToString("yyyy-MM-dd") == formattedDate && m.Status > 0)
+    .Select(k => decimal.Parse(k.TotalPrice))
+    .ToList();
+
+    var totalPriceToday = listtotalPriceToday.Sum();
+
+    var listtotalPrice = Model
+    .Where(m => m.IsActive == true && m.Status > 0)
+    .Select(k => decimal.Parse(k.TotalPrice)) // chuyển đổi chuỗi sang kiểu số
+    .ToList();
+
+    var totalPrice = listtotalPrice.Sum();
+}
+<style>
+    main {
+        background-image: url(./assets/img/dichvu.jpg)
+    }
+</style>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tổng quan</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Tổng Quan</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Thống kê vé bán trong ngày</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <span class="text-muted small pt-2 ps-1">Số vé đã bán trong ngày : <span class=" text-success small pt-1 fw-bold ">@noticaToday</span> </span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Sales Card -->
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Thống kê doanh thu trong ngày</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <span class="text-muted small pt-2 ps-1">Tổng doanh thu trong ngày : <span class=" text-success small pt-1 fw-bold ">@totalPriceToday</span> </span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Sales Card -->
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card revenue-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Thống kê tất cả vé bán</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <span class="text-muted small pt-2 ps-1" >Tổng số vé đã bán ra : <span class=" text-success small pt-1 fw-bold ">@noticaTotal</span> </span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Revenue Card -->
+                    <!-- Customers Card -->
+                    <div class="col-xxl-3 col-xl-6">
+
+                        <div class="card info-card customers-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Thống kê doanh thu</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <span class="text-muted small pt-2 ps-1">Tổng doanh thu : <span class=" text-success small pt-1 fw-bold ">@totalPrice</span> </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div><!-- End Customers Card -->
+                    <!-- Reports -->
+                   <!-- End Reports -->
+                    <!-- Top Selling -->
+
+
+                </div>
+            </div><!-- End Left side columns -->
+
+
+        </div>
+    </section>
+
+</main>

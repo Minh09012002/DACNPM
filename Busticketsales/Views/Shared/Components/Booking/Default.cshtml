@@ -1,0 +1,37 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model IList<Booking>
+
+<!-- Home Search tickets booking -->
+<div class="col-lg-5 home-search-wrapper">
+    <h2 class="home-title mb4">Đặt vé trực tuyến</h2>
+    <div class=" rounded h-100 d-flex align-items-center wow " data-wow-delay="0.9s">
+        <form method="post" asp-controller="CustomersOrder" asp-action="Index">
+            <div class="row g-3">
+                <div class="col-12">
+                    <select class="form-select bg-light border-0" style="height: 55px;" required id="Ps" name="Ps">
+                        <option value="">Điểm đi</option>
+                        @foreach(var b in Model){
+                            <option  >@b.ProvinceStarts</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-12">
+                    <select class="form-select bg-light border-0" style="height: 55px;" required id="Pe" name="Pe">
+                        <option value="">Điểm đến</option>
+                        @foreach (var b in Model)
+                        {
+                            <option >@b.ProvinceEnds</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-xl-12">
+                    <input id="date" name="date" type="date" class="form-control bg-light border-0" placeholder="" style="height: 55px;">
+                </div>
+                <div class="col-12">
+                    <button  class="btn btn-search btn-dark w-100 py-3" type="submit">Tìm Chuyễn Xe</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

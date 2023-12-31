@@ -1,0 +1,57 @@
+﻿@model Busticketsales.Models.Route
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="main">
+    <div class="pagetitle">
+        <h2>Thêm mới </h2>
+    </div>
+    <div class="container shadow p-5">
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="PointOfDe">Điểm đi</label>
+                    <input type="text" class="form-control mb-3" asp-for="PointOfDe" placeceholder="Nhập điểm đi" />
+                    <span asp-validation-for="PointOfDe" class="alert-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="StopPoint">Điểm trả</label>
+                <input type="text" class="form-control mb-3" asp-for="StopPoint" placeholder="Nhập điểm Trả" />
+                <span asp-validation-for="StopPoint" class="alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Price">Giá Vé</label>
+                <input type="text" class="form-control mb-3" asp-for="Price" placeholder="Nhập giá vé" />
+                <span asp-validation-for="Price" class="alert-danger"></span>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Images">Images</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-success" type="button" onclick="openDialog()">Choose a pic</button>
+                    </div>
+                    <input type="text" class="form-control" asp-for="Images" id="file_input" aria-describedby="button-addon2" />
+                </div>
+            </div>
+            <div class="form-group mb-5 mt-5">
+                <label>
+                    @Html.CheckBox("IsActive",false)
+                    Hiển thị
+                </label>
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="Status" class="form-control" value="1" />
+            </div>
+            <button type="Submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Lưu</button>
+            <a asp-controller="Route" asp-action="Index" class="btn btn-lg btn-warning p-2">Quay lại</a>
+        </form>
+    </div>
+</div>
+@{
+    var summerNote = new Busticketsales.Areas.Admin.Models.SummerNote("#Contents");
+    <partial name="_SummerNote" model="summerNote" />
+}
+

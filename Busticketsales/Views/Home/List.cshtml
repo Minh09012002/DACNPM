@@ -1,0 +1,38 @@
+﻿@model IList<Busticketsales.Models.ViewPostMenu>
+@using Busticketsales.Utilities;
+
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Blog list Start -->
+            <div class="col-lg-8">
+                <div class="row g-5">
+                    <div class="col-md-12 wow slideInUp" data-wow-delay="0.1s">
+                        @foreach (var l in Model)
+                        {
+                            string url = Functions.TitleSlugGeneration("Post", l.Title, l.PostID);
+                            <div class="row blog-item rounded overflow-hidden">
+                                <div class="col-md-4 blog-image position-relative overflow-hidden">
+                                    <img class="" style="width: 100%" src="@l.Images" alt="">
+                                </div>
+                                <div class="col-md-8 blog-desc">
+                                    <h4 class=""> <a href="/@url"> @l.Title</a></h4>
+                                    <div class="d-flex mb-3">
+                                        <small><i class="far fa-calendar-alt  me-2"></i>01 Jan, 2045</small>
+                                    </div>
+                                    <p>@l.Abstract</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Blog list End -->
+                <!-- Recent Post Start -->
+                @await Component.InvokeAsync("RencentPost")
+                <!-- Recent Post End -->
+        </div>
+    </div>
+</div>

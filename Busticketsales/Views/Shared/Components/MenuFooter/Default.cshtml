@@ -1,0 +1,50 @@
+﻿@using Busticketsales.Models;
+@model IList<Menu>
+
+
+<div class="container-fluid footer-bg text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="row row-small" id="row-674225234">
+                <div id="col-12" class=" row col medium-5 small-12 large-5">
+                    @foreach (var item in Model.Where(m => m.Levels == 1).OrderBy(m => m.MenuID ))
+                    {
+
+                        var Pid = item.MenuID;
+                        var smenu = Model.Where(m => m.ParentID == Pid).OrderBy(m => m.MenuID).ToList();
+                        <div class="col-4">
+                            <div class="text title_footer">
+                                <h4 class=" hover-link ff-secondary text-start  fw-normal mb-4">@item.MenuName</h4>
+                            </div>
+                            @if (smenu.Count != 0)
+                            {
+                                <div class="text title_footer">
+                                    @foreach (var smn in smenu)
+                                    {
+                                        //string url1 = function.TitlesSlugGeneration("list", smn.MenuName, smn.MenuID);
+                                  @*  if (!string.IsNullOrEmpty(smn.Link))
+                                        {
+                                            url1 = smn.Link;
+                                        }*@
+                                        <a href="" class=" hover-link d-flex align-items-center" style="padding: 5px 0px"><i class=" px-2"></i><span class="">@smn.MenuName</span></a>
+
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+                    <p class="text-center">&copy; Copyright 2022 &copy; Bản quyền thuộc quản lí <a class="border-bottom" href="#"> Nhà Xe bình an</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

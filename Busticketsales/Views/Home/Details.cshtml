@@ -1,0 +1,56 @@
+﻿@using Busticketsales.Models;
+@using Busticketsales.Utilities;
+@model Busticketsales.Models.Post;
+
+<meta charset="utf-8" />
+<!-- Full Screen Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+            <div class="modal-header border-0">
+                <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center">
+                <div class="input-group" style="max-width: 600px;">
+                    <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                    <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Full Screen Search End -->
+<!-- Blog Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <!-- Blog Detail Start -->
+                <div class="mb-5 blog-detail-img">
+                    <img class="img-fluid w-100 rounded mb-5" src="@Html.DisplayFor(m => m.Images)" alt="">
+                   
+                </div>
+                <div class = "blog-desc">
+                     <h1 class="mb-4">@Html.DisplayFor(m=>m.Title)</h1>
+                    <p>
+                        @Html.Raw(Model.Contents)
+                    </p>
+                </div>
+                
+                <!-- Blog Detail End -->
+                @* Comment*@
+
+                @await Component.InvokeAsync("LoadComment")
+                @await Component.InvokeAsync("CustomerComment")
+            </div>
+
+            <!-- Sidebar Start -->
+          @await Component.InvokeAsync("RencentPost")
+            <!-- Sidebar End -->
+        </div>
+    </div>
+
+    
+    
+</div>
+<!-- Blog End -->
